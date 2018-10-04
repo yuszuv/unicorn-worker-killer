@@ -16,6 +16,8 @@ module Unicorn::WorkerKiller
     alive_sec = (Time.now - start_time).round
     worker_pid = Process.pid
 
+    return if File.exists?(Rails.root.join(Settings.import_state_file))
+
     @@kill_attempts ||= 0
     @@kill_attempts += 1
 
